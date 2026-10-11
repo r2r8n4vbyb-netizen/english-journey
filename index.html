@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Journey: Beginner to Cabin Crew</title>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--tx:#1d2433;--mu:#667;--pr:#1f6feb;--ok:#1a9d5c;--bd:#dde3ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10141c;--card:#1a202c;--tx:#eef1f7;--mu:#9aa5b8;--bd:#2c3547;--pr:#5b9bff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 -apple-system,"Sarabun","Noto Sans Thai",sans-serif}
+main{max-width:720px;margin:0 auto;padding:12px 14px 90px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;color:var(--mu);padding:12px 2px;font-size:13px;min-height:48px}nav button.on{color:var(--pr);font-weight:700}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:10px 0}
+h1{font-size:20px;margin:6px 0}h2{font-size:18px;margin:4px 0}h3{font-size:16px;margin:12px 0 4px}
+.b{background:var(--pr);color:#fff;border:0;border-radius:10px;padding:11px 16px;font-size:16px;margin:4px 4px 4px 0;min-height:44px}
+.b.g{background:transparent;color:var(--pr);border:1px solid var(--pr)}.b.ok{background:var(--ok)}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok)}
+.mu{color:var(--mu);font-size:14px}table{width:100%;border-collapse:collapse}td{padding:6px 4px;border-bottom:1px solid var(--bd);vertical-align:top}
+input[type=search],input[type=date],textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font-size:16px}
+.o{display:block;width:100%;text-align:left;margin:6px 0;padding:11px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font-size:16px}
+.o.r{border-color:var(--ok);background:rgba(26,157,92,.15)}.o.w{border-color:#d33;background:rgba(220,50,50,.12)}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:9px;background:var(--bd)}
+</style></head><body><main id="app"></main>
+<nav id="nav"></nav>
+<script>
+const MONTHS=[
+["ตุลาคม 2569","เสียง การออกเสียง คำศัพท์ และประโยคแรก"],
+["พฤศจิกายน 2569","ไวยากรณ์พื้นฐาน สร้างประโยค ตั้งคำถาม ชีวิตประจำวัน"],
+["ธันวาคม 2569","ฟัง พูด ซื้อของ สั่งอาหาร ถามทาง เล่าอดีต/อนาคต"],
+["มกราคม 2570","ภาษาอังกฤษเพื่อการทำงาน ลูกค้า อธิบายงาน AR"],
+["กุมภาพันธ์ 2570","งานบริการ แก้ปัญหา ขอโทษ ทำงานเป็นทีม ฟังจับใจความ"],
+["มีนาคม 2570","เตรียมสัมภาษณ์แอร์ แนะนำตัว จุดแข็ง แรงจูงใจ คำถามเชิงพฤติกรรม"],
+["เมษายน 2570","ศัพท์สนามบิน บริการผู้โดยสาร ความปลอดภัย สัมภาษณ์จำลอง"],
+["พฤษภาคม 2570","ทบทวนทุกทักษะ ประเมินผล สัมภาษณ์เต็มรูปแบบ วางแผนหลังเปิดเทอม"]];
+const L=[
+{id:"oct-1",m:0,t:"ทักทายและลาจาก",goal:"ทักทาย ขอบคุณ ขอโทษ ได้ 8 ประโยคพื้นฐาน",
+ th:"ภาษาอังกฤษทักทายได้ทุกเวลาด้วย Hello / Hi ส่วน Good morning ใช้ช่วงเช้า Good evening ใช้ช่วงเย็น ท้ายประโยคมักมี Please เพื่อความสุภาพ ซึ่งสำคัญมากสำหรับงานบริการ",
+ v:[["Hello","สวัสดี","เฮ-โหล"],["Good morning","สวัสดีตอนเช้า","กุด-มอ-นิง"],["Good evening","สวัสดีตอนเย็น","กุด-อีฟ-นิง"],["Goodbye","ลาก่อน","กุด-บาย"],["Thank you","ขอบคุณ","แธงค์-ยู"],["Please","กรุณา","พลีส"],["Sorry","ขอโทษ","ซอ-รี่"],["Welcome","ยินดีต้อนรับ","เวล-คัม"]],
+ sound:"เสียง th ใน Thank ให้เอาปลายลิ้นแตะระหว่างฟัน แล้วเป่าลมเบา ๆ (ไม่ใช่เสียง ท หรือ ส) และเสียงท้ายคำ เช่น -k, -s ให้ออกเสียงเบา ๆ อย่าตัดทิ้ง",
+ g:"รูปแบบ: Good + ช่วงเวลา เช่น Good morning, Good evening\nผิดบ่อย: ✗ Good morning night → ✓ Good night (ใช้ตอนลาไปนอน)",
+ s:[["Good morning. Welcome!","สวัสดีตอนเช้า ยินดีต้อนรับ"],["Thank you very much.","ขอบคุณมาก"],["Sorry, please wait.","ขอโทษ กรุณารอสักครู่"]],
+ d:[["A","Good morning. Welcome!"],["B","Good morning. Thank you."],["A","Please sit here."],["B","Thank you. Goodbye!"]],
+ q:[["ตอนเช้าทักว่าอะไร?",["Good evening","Good morning","Goodbye"],1,"Morning = ช่วงเช้า"],["'ขอบคุณ' คือข้อไหน?",["Sorry","Please","Thank you"],2,"Thank you = ขอบคุณ"],["'Sorry' แปลว่า?",["ขอโทษ","ลาก่อน","กรุณา"],0,"Sorry = ขอโทษ"],["ข้อใดสุภาพที่สุดเมื่อขอให้รอ?",["Wait.","Please wait.","Wait now."],1,"ใส่ Please ให้สุภาพ"],["Goodbye ใช้ตอนไหน?",["ทักทาย","ลาจาก","ขอบคุณ"],1,"Goodbye = ลาก่อน"]],
+ task:"พูดตามทั้ง 8 คำ 3 รอบ แล้วลองพูดทักทายหน้ากระจกโดยไม่ดูหน้าจอ 1 นาที"},
+{id:"oct-2",m:0,t:"ฉันคือ... / คุณคือ...",goal:"แนะนำชื่อและประเทศของตัวเองได้",
+ th:"I am (I'm) แปลว่า ฉันเป็น/ฉันคือ ใช้บอกชื่อหรือที่มา You are ใช้พูดถึงอีกฝ่าย ประโยคภาษาอังกฤษต้องมีกริยา am/is/are เสมอ ต่างจากภาษาไทยที่ละได้",
+ v:[["I am","ฉันคือ","ไอ-แอม"],["You are","คุณคือ","ยู-อาร์"],["name","ชื่อ","เนม"],["from","มาจาก","ฟรอม"],["Thailand","ประเทศไทย","ไท-แลนด์"],["Nice to meet you","ยินดีที่ได้รู้จัก","ไนซ์-ทู-มีท-ยู"]],
+ sound:"เสียง v (very) ฟันบนแตะริมฝีปากล่าง ไม่ใช่เสียง ว และเสียง r ให้ม้วนลิ้นเล็กน้อยโดยไม่ให้ลิ้นแตะ",
+ g:"I am + ชื่อ/สถานที่ เช่น I am Nok. I am from Thailand.\nผิดบ่อย: ✗ I from Thailand → ✓ I am from Thailand",
+ s:[["My name is Nok.","ฉันชื่อนก"],["I am from Thailand.","ฉันมาจากประเทศไทย"],["Nice to meet you.","ยินดีที่ได้รู้จัก"]],
+ d:[["A","Hello. My name is Nok."],["B","Nice to meet you, Nok."],["A","Nice to meet you. I am from Thailand."]],
+ q:[["เลือกประโยคที่ถูก",["I from Thailand","I am from Thailand","I is from Thailand"],1,"I ใช้คู่กับ am"],["'You are' แปลว่า?",["ฉันคือ","คุณคือ","เขาคือ"],1,"You are = คุณคือ"],["'ยินดีที่ได้รู้จัก' คือ?",["Nice to meet you","Thank you","Goodbye"],0,"ใช้ตอนพบกันครั้งแรก"],["'My name is...' ใช้ทำอะไร?",["บอกชื่อ","ขอโทษ","ลาจาก"],0,"บอกชื่อตัวเอง"],["ข้อใดแปลว่า 'ชื่อ'?",["from","name","are"],1,"name = ชื่อ"]],
+ task:"เขียนและพูดแนะนำตัวเอง 3 ประโยค (ชื่อ มาจากไหน ยินดีที่ได้รู้จัก)"},
+{id:"oct-3",m:0,t:"ขอให้พูดช้า/พูดซ้ำ",goal:"ขอให้อีกฝ่ายพูดซ้ำหรือช้าลงได้ ทักษะสำคัญของคนเริ่มต้น",
+ th:"ถ้าฟังไม่ทัน อย่าเงียบ ให้ใช้ประโยคเหล่านี้ได้ทันที ผู้โดยสารและผู้สัมภาษณ์เข้าใจว่าเป็นเรื่องปกติ และสุภาพ",
+ v:[["Excuse me","ขอโทษ/ขออนุญาต","อิก-สคิวส์-มี"],["Pardon?","ว่าไงนะคะ","พาร์-เดิน"],["repeat","พูดซ้ำ","รี-พีท"],["slowly","ช้า ๆ","สโลว์-ลี"],["understand","เข้าใจ","อัน-เดอ-สแตนด์"]],
+ sound:"คำที่ลงเสียงหนักในคำยาว เช่น re-PEAT, un-der-STAND ให้ออกเสียงพยางค์ที่หนักให้ชัดและยาวกว่าพยางค์อื่น",
+ g:"Could you + กริยา...? = ช่วย...ได้ไหม\nCould you repeat that, please?\nผิดบ่อย: ✗ Repeat! (ห้วนเกินไป) → ✓ Could you repeat that, please?",
+ s:[["Could you repeat that, please?","ช่วยพูดซ้ำได้ไหมคะ"],["Could you speak more slowly?","ช่วยพูดช้าลงได้ไหมคะ"],["I don't understand.","ฉันไม่เข้าใจ"]],
+ d:[["A","Where are you from?"],["B","Sorry, could you speak more slowly?"],["A","Where... are... you... from?"],["B","I am from Thailand. Thank you."]],
+ q:[["ฟังไม่ทัน ควรพูดว่า?",["Could you repeat that, please?","Repeat!","Nothing"],0,"สุภาพและชัดเจน"],["'slowly' แปลว่า?",["เร็ว","ช้า ๆ","ดัง"],1,"slowly = ช้า ๆ"],["'I don't understand' แปลว่า?",["ฉันไม่เข้าใจ","ฉันไม่ชอบ","ฉันไม่รู้จัก"],0,"understand = เข้าใจ"],["'Pardon?' ใช้เมื่อ?",["ไม่ได้ยินชัด","ขอบคุณ","ลาจาก"],0,"ขอให้พูดอีกครั้ง"],["ข้อใดขอให้พูดช้าลง?",["Speak fast","Could you speak more slowly?","Please go"],1,"more slowly = ช้าลง"]],
+ task:"เปิดเสียงประโยค Could you speak more slowly? ตั้งความเร็ว 0.7 แล้วพูดตามให้เหมือน 5 ครั้ง"},
+{id:"oct-4",m:0,t:"ตัวอักษรและการสะกดชื่อ",goal:"อ่านตัวอักษร A–Z และสะกดชื่อตัวเองได้",
+ th:"การสะกดชื่อเป็นทักษะที่ใช้จริงบ่อยมาก เช่น ตอนจองตั๋ว กรอกแบบฟอร์ม หรือสัมภาษณ์ ให้ฝึกอ่านชื่อตัวอักษรทีละกลุ่ม แล้วลองสะกดชื่อของตัวเอง",
+ v:[["A B C","ตัวอักษร","เอ-บี-ซี"],["D E F","ตัวอักษร","ดี-อี-เอฟ"],["G H I","ตัวอักษร","จี-เอช-ไอ"],["J K L","ตัวอักษร","เจ-เค-แอล"],["M N O","ตัวอักษร","เอ็ม-เอ็น-โอ"],["P Q R","ตัวอักษร","พี-คิว-อาร์"],["S T U","ตัวอักษร","เอส-ที-ยู"],["V W X Y Z","ตัวอักษร","วี-ดับ-เบิล-ยู-เอ็กซ์-วาย-แซด"],["spell","สะกดคำ","สะ-เปล"]],
+ sound:"V (วี) ฟันบนแตะริมฝีปากล่าง ส่วน W (ดับเบิลยู) ริมฝีปากห่อกลม และตัว R ไม่ใช่เสียง ร เรือ แบบรัวลิ้น",
+ g:"ถามการสะกด: How do you spell your name?\nตอบ: N-O-K (อ่านทีละตัว)\nผิดบ่อย: ✗ Spell your name! (ห้วน) → ✓ How do you spell your name?",
+ s:[["How do you spell your name?","คุณสะกดชื่อว่าอย่างไร"],["My name is Nok. N-O-K.","ฉันชื่อนก สะกด N-O-K"],["Could you spell that, please?","ช่วยสะกดให้หน่อยได้ไหม"]],
+ d:[["A","What is your name?"],["B","My name is Nok."],["A","How do you spell that?"],["B","N-O-K."]],
+ q:[["ตัว W อ่านว่า?",["ดับเบิลยู","วี","ยู"],0,"W = double-u"],["'spell' แปลว่า?",["สะกดคำ","พูดช้า","ขอบคุณ"],0,"spell = สะกด"],["ถามวิธีสะกดชื่อว่า?",["How do you spell your name?","Spell now!","Name spell"],0,"ประโยคสุภาพและถูกไวยากรณ์"],["ชื่อ Nok สะกดอย่างไร?",["N-O-K","M-O-K","N-A-K"],0,"อ่านทีละตัว"],["ข้อใดไม่ใช่ตัวอักษร?",["Q","Z","Please"],2,"Please เป็นคำ ไม่ใช่ตัวอักษร"]],
+ task:"สะกดชื่อและนามสกุลภาษาอังกฤษของตัวเองออกเสียง 3 รอบ โดยไม่ดูหน้าจอ"},
+{id:"oct-5",m:0,t:"ตัวเลข 0–10",goal:"พูดและฟังตัวเลข 0–10 ได้",
+ th:"ตัวเลขใช้บอกเบอร์โทร เที่ยวบิน ราคา และเวลา เริ่มจาก 0–10 ก่อน ฝึกฟังและพูดช้า ๆ ให้ชัด",
+ v:[["zero","ศูนย์","ซี-โรว"],["one","หนึ่ง","วัน"],["two","สอง","ทู"],["three","สาม","ธรี"],["four","สี่","โฟร์"],["five","ห้า","ไฟว์"],["six","หก","ซิกซ์"],["seven","เจ็ด","เซ-เวิน"],["eight","แปด","เอท"],["nine","เก้า","ไนน์"],["ten","สิบ","เทน"]],
+ sound:"three ขึ้นต้นด้วยเสียง th (ลิ้นแตะระหว่างฟัน) ไม่ใช่ ท หรือ ส และ six ลงท้ายด้วย -ks ให้ออกเสียงท้ายให้ครบ",
+ g:"บอกจำนวน: number + นาม เช่น two bags, five seats\nผิดบ่อย: ✗ two bag → ✓ two bags (จำนวนมากกว่า 1 เติม -s)",
+ s:[["I have two bags.","ฉันมีกระเป๋าสองใบ"],["Seat number five.","ที่นั่งหมายเลขห้า"],["Please wait ten minutes.","กรุณารอสิบนาที"]],
+ d:[["A","What is your seat number?"],["B","Seven."],["A","Seven, thank you."]],
+ q:[["three คือเลขอะไร?",["2","3","4"],1,"three = 3"],["เลือกประโยคที่ถูก",["two bag","two bags","twos bag"],1,"มากกว่า 1 เติม -s"],["eight คือ?",["8","9","10"],0,"eight = 8"],["'ten minutes' แปลว่า?",["สิบนาที","สองนาที","เจ็ดนาที"],0,"ten = 10"],["ข้อใดคือ 0?",["one","zero","nine"],1,"zero = 0"]],
+ task:"ฟังเลข 0–10 แล้วพูดตาม จากนั้นพูดเบอร์โทรของตัวเองเป็นภาษาอังกฤษทีละตัว"},
+{id:"oct-6",m:0,t:"Yes / No และ Are you...?",goal:"ถามและตอบคำถามใช่/ไม่ใช่ได้",
+ th:"คำถามใช่/ไม่ใช่ในภาษาอังกฤษสลับตำแหน่ง are ไปไว้หน้า you: You are... เป็น Are you...? ตอบสั้น ๆ ได้ด้วย Yes, I am. หรือ No, I am not.",
+ v:[["Yes","ใช่","เยส"],["No","ไม่ใช่","โน"],["Are you...?","คุณเป็น...ไหม","อาร์-ยู"],["Yes, I am.","ใช่ ฉันเป็น","เยส-ไอ-แอม"],["No, I am not.","ไม่ ฉันไม่ได้เป็น","โน-ไอ-แอม-นอท"],["Thai","ชาวไทย","ไท"]],
+ sound:"No ออกเสียงยาว มีเสียงสระประสม (โน-อุ) ไม่ใช่ น้อ สั้น ๆ และ Yes ขึ้นต้นด้วยเสียง y ลิ้นยกใกล้เพดานปาก",
+ g:"ประโยคบอกเล่า: You are Thai.\nคำถาม: Are you Thai?\nตอบ: Yes, I am. / No, I am not.\nผิดบ่อย: ✗ You are Thai? (ใช้ในพูดสั้นได้แต่ไม่แนะนำช่วงนี้) → ✓ Are you Thai?",
+ s:[["Are you Thai?","คุณเป็นคนไทยไหม"],["Yes, I am.","ใช่ ฉันเป็น"],["No, I am not.","ไม่ ฉันไม่ได้เป็น"]],
+ d:[["A","Hello. Are you Nok?"],["B","Yes, I am."],["A","Are you from Thailand?"],["B","Yes, I am. Nice to meet you."]],
+ q:[["เปลี่ยน 'You are Thai.' เป็นคำถาม",["Are you Thai?","You Thai are?","Is you Thai?"],0,"are ไปหน้า you"],["ตอบ Are you Nok? ว่าใช่",["Yes, I am.","Yes, you are.","Yes, am I."],0,"ตอบด้วย I am"],["No แปลว่า?",["ใช่","ไม่ใช่","ขอบคุณ"],1,"No = ไม่"],["ข้อใดเป็นคำถามที่ถูก?",["Are you from Thailand?","You from Thailand are?","Is you from Thailand?"],0,"Are you + ...?"],["'No, I am not.' แปลว่า?",["ไม่ ฉันไม่ได้เป็น","ใช่ ฉันเป็น","ฉันไม่รู้"],0,"not = ไม่"]],
+ task:"ถามตัวเอง 3 คำถามแบบ Are you...? แล้วพูดตอบทั้ง Yes และ No"},
+{id:"oct-7",m:0,t:"ทบทวนสัปดาห์ที่ 1",goal:"ทบทวนบทที่ 1–6 ไม่เรียนเนื้อหาใหม่",
+ th:"วันนี้เป็นวันทบทวนและทดสอบ ไม่มีเนื้อหาใหม่ ให้เปิดบท 1–6 ฟังเสียงซ้ำ ทำเครื่องหมายคำที่ยังไม่แม่นในคลังคำศัพท์ แล้วทำแบบทดสอบด้านล่าง",
+ v:[["Welcome","ยินดีต้อนรับ","เวล-คัม"],["slowly","ช้า ๆ","สโลว์-ลี"],["spell","สะกดคำ","สะ-เปล"],["five","ห้า","ไฟว์"]],
+ sound:"ทบทวนเสียง th (Thank, three), v (very) และเสียงท้ายคำ -k -s -t ให้ครบ",
+ g:"ทบทวน: I am + ..., Are you...?, Could you repeat that, please?",
+ s:[["Hello. My name is Nok.","สวัสดี ฉันชื่อนก"],["Could you speak more slowly?","ช่วยพูดช้าลงได้ไหม"],["Are you from Thailand?","คุณมาจากประเทศไทยหรือเปล่า"]],
+ d:[["A","Good morning. Welcome!"],["B","Good morning. Sorry, could you repeat that?"],["A","Welcome. What is your name?"],["B","My name is Nok. N-O-K."]],
+ q:[["ขอให้พูดช้าลง",["Could you speak more slowly?","Speak!","Slowly you"],0,"บทที่ 3"],["ตอบ Are you Thai? ว่าใช่",["Yes, I am.","Yes, you are.","No."],0,"บทที่ 6"],["two ___ (กระเป๋า 2 ใบ)",["bag","bags","bagses"],1,"บทที่ 5"],["ตอนเช้าทักว่า?",["Good morning","Goodbye","Sorry"],0,"บทที่ 1"],["สะกดชื่อใช้ประโยคใด?",["How do you spell your name?","Spell name!","Name you?"],0,"บทที่ 4"]],
+ task:"พูดแนะนำตัวเอง 5 ประโยคโดยไม่ดูสคริปต์ แล้วอัดเสียงเก็บไว้เทียบกับสัปดาห์หน้า"},
+{id:"oct-8",m:0,t:"ครอบครัวและคนใกล้ตัว",goal:"พูดถึงสมาชิกครอบครัวด้วย My ... is ...",
+ th:"My แปลว่า ของฉัน ใช้บอกว่าใครเป็นของเรา เช่น My mother (แม่ของฉัน) ถ้าพูดถึงคนเดียวใช้ is ถ้าพูดถึงหลายคนใช้ are เรื่องครอบครัวใช้ฝึกพูดแนะนำตัวและคุยเล่นกับผู้โดยสารได้",
+ v:[["mother","แม่","มา-เธอะ"],["father","พ่อ","ฟา-เธอะ"],["sister","พี่/น้องสาว","ซิส-เตอะ"],["brother","พี่/น้องชาย","บรา-เธอะ"],["friend","เพื่อน","เฟรนด์"],["family","ครอบครัว","แฟม-มิ-ลี่"]],
+ sound:"mother, father, brother มีเสียง th แบบสั่นเสียง (ลิ้นแตะฟัน) ไม่ใช่ ด และคำลงท้าย -er ออกเสียงเบา ๆ คล้าย เออะ",
+ g:"My + คำนาม + is + ...  เช่น My mother is kind.\nหลายคน: My parents are Thai.\nผิดบ่อย: ✗ My mother are kind → ✓ My mother is kind",
+ s:[["My mother is kind.","แม่ของฉันใจดี"],["My brother is a student.","พี่ชายของฉันเป็นนักเรียน"],["I have a small family.","ฉันมีครอบครัวเล็ก ๆ"]],
+ d:[["A","Is this your family?"],["B","Yes, it is. This is my mother."],["A","She is nice."],["B","Thank you."]],
+ q:[["mother แปลว่า?",["แม่","พ่อ","เพื่อน"],0,"mother = แม่"],["เลือกประโยคที่ถูก",["My mother are kind","My mother is kind","My mother am kind"],1,"คนเดียวใช้ is"],["My แปลว่า?",["ของฉัน","ของคุณ","ของเขา"],0,"My = ของฉัน"],["brother คือใคร?",["พี่/น้องชาย","พี่/น้องสาว","พ่อ"],0,"brother = พี่/น้องชาย"],["'เพื่อน' คือ?",["family","friend","father"],1,"friend = เพื่อน"]],
+ task:"พูดถึงคนในครอบครัว 3 คน อย่างน้อยคนละ 1 ประโยค เช่น My father is ..."},
+{id:"oct-9",m:0,t:"This / That และสิ่งของเดินทาง",goal:"ถามและบอกชื่อสิ่งของด้วย This is... / What is this?",
+ th:"This คือสิ่งนี้ (ใกล้ตัว) That คือสิ่งนั้น (ไกลตัว) ใช้คู่กับ is และสิ่งของที่เจอบ่อยในสนามบิน ต้องมี a/an นำหน้าคำนามเอกพจน์ เช่น a bag, an apple",
+ v:[["bag","กระเป๋า","แบ็ก"],["passport","หนังสือเดินทาง","พาส-พอร์ต"],["ticket","ตั๋ว","ทิก-เกิท"],["seat","ที่นั่ง","ซีท"],["water","น้ำ","วอ-เตอะ"],["this","นี่","ธิส"],["that","นั่น","แธท"]],
+ sound:"seat (ซีท) ยาว ต่างจาก sit (ซิท) สั้น ถ้าออกเสียงสั้นเกินจะกลายเป็นคำว่า นั่ง ตัวเลือกที่ผิดความหมาย",
+ g:"This is a + คำนาม / That is a + คำนาม\nคำถาม: What is this?  ตอบ: It is a bag.\nผิดบ่อย: ✗ This is bag → ✓ This is a bag",
+ s:[["This is my passport.","นี่คือหนังสือเดินทางของฉัน"],["What is that?","นั่นคืออะไร"],["That is a ticket.","นั่นคือตั๋ว"]],
+ d:[["A","Excuse me. Is this your bag?"],["B","No, it is not. That is my bag."],["A","Sorry. Here is your bag."],["B","Thank you."]],
+ q:[["passport คือ?",["ตั๋ว","หนังสือเดินทาง","กระเป๋า"],1,"passport = หนังสือเดินทาง"],["ประโยคที่ถูกคือ?",["This is bag","This is a bag","This a bag"],1,"ต้องมี is และ a"],["อะไรอยู่ไกลตัว?",["this","that"],1,"that = นั่น (ไกล)"],["seat แปลว่า?",["ที่นั่ง","น้ำ","ตั๋ว"],0,"seat = ที่นั่ง"],["What is this? ตอบว่า?",["It is a ticket.","Thank you","Yes, I am"],0,"ตอบด้วย It is..."]],
+ task:"หยิบของ 5 ชิ้นในบ้าน พูด What is this? แล้วตอบ It is a ... ให้ครบ"},
+{id:"oct-10",m:0,t:"วันในสัปดาห์",goal:"บอกวันทั้ง 7 วันและวันนี้เป็นวันอะไร",
+ th:"ชื่อวันในภาษาอังกฤษขึ้นต้นด้วยตัวใหญ่เสมอ และใช้ on นำหน้า เช่น on Monday ทักษะนี้ใช้ในการตอบเรื่องตารางงานและการนัดหมาย",
+ v:[["Monday","วันจันทร์","มัน-เดย์"],["Tuesday","วันอังคาร","ทิว-ส์เดย์"],["Wednesday","วันพุธ","เวนส์-เดย์"],["Thursday","วันพฤหัสบดี","เธอร์ส-เดย์"],["Friday","วันศุกร์","ไฟร-เดย์"],["Saturday","วันเสาร์","แซท-เตอะ-เดย์"],["Sunday","วันอาทิตย์","ซัน-เดย์"]],
+ sound:"Wednesday อ่านว่า เวนส์-เดย์ (ตัว d ไม่ออกเสียง) และ Thursday ขึ้นต้นด้วยเสียง th ลิ้นแตะฟัน",
+ g:"What day is it today? → It is Monday.\nI study on Monday.\nผิดบ่อย: ✗ monday → ✓ Monday (ตัวใหญ่เสมอ)",
+ s:[["What day is it today?","วันนี้วันอะไร"],["It is Friday.","วันนี้วันศุกร์"],["I work on Monday.","ฉันทำงานวันจันทร์"]],
+ d:[["A","What day is it today?"],["B","It is Wednesday."],["A","Thank you."]],
+ q:[["Friday คือ?",["วันศุกร์","วันเสาร์","วันพุธ"],0,"Friday = วันศุกร์"],["Sunday คือ?",["วันจันทร์","วันอาทิตย์","วันอังคาร"],1,"Sunday = วันอาทิตย์"],["ข้อใดเขียนถูก?",["monday","Monday","MONDAY ok"],1,"ต้องขึ้นต้นด้วยตัวใหญ่"],["What day is it today? ตอบว่า?",["It is Tuesday.","I am Tuesday.","Tuesday you"],0,"ตอบ It is + วัน"],["ข้อใดถูก?",["I work in Monday","I work on Monday","I work at Monday"],1,"ใช้ on กับวัน"]],
+ task:"พูดชื่อวัน 7 วันให้ครบ 3 รอบ แล้วบอกว่าสัปดาห์นี้คุณเรียนวันไหนบ้าง"},
+{id:"oct-11",m:0,t:"ทบทวนสัปดาห์ที่ 2",goal:"ทบทวนบทที่ 8–10 ไม่เรียนเนื้อหาใหม่",
+ th:"วันทบทวน: เปิดบทที่ 8–10 ฟังเสียงซ้ำ ทบทวนคำที่ยังไม่แม่นในคลังคำศัพท์ แล้วทำแบบทดสอบด้านล่าง",
+ v:[["family","ครอบครัว","แฟม-มิ-ลี่"],["ticket","ตั๋ว","ทิก-เกิท"],["Friday","วันศุกร์","ไฟร-เดย์"]],
+ sound:"ทบทวนเสียง th (mother, Thursday), seat/sit และคำลงท้ายที่ต้องออกให้ครบ",
+ g:"ทบทวน: My ... is ... / This is a ... / What day is it today?",
+ s:[["My father is kind.","พ่อของฉันใจดี"],["This is my ticket.","นี่คือตั๋วของฉัน"],["It is Saturday.","วันนี้วันเสาร์"]],
+ d:[["A","What is that?"],["B","It is my passport."],["A","What day is it today?"],["B","It is Friday."]],
+ q:[["My father ___ kind",["is","are","am"],0,"คนเดียวใช้ is"],["This is ___ ticket",["a","an","the a"],0,"ticket ขึ้นต้นด้วยเสียงพยัญชนะ ใช้ a"],["Thursday คือ?",["วันพฤหัสบดี","วันพุธ","วันศุกร์"],0,"Thursday = พฤหัสบดี"],["'นั่น' (ไกล) คือ?",["this","that"],1,"that = นั่น"],["friend คือ?",["เพื่อน","ครอบครัว","แม่"],0,"friend = เพื่อน"]],
+ task:"พูดแนะนำครอบครัวและสิ่งของ 5 ประโยค แล้วอัดเสียงเทียบกับครั้งก่อน"},
+{id:"oct-12",m:0,t:"บอกเวลา",goal:"ถามและตอบเวลาเต็มชั่วโมงได้",
+ th:"ถามเวลาด้วย What time is it? ตอบว่า It is + ตัวเลข + o'clock เช่น It is seven o'clock. ทักษะนี้ใช้บ่อยทั้งในสนามบินและการนัดหมาย",
+ v:[["time","เวลา","ไทม์"],["o'clock","นาฬิกา (เต็มชั่วโมง)","อะ-คล็อค"],["morning","ตอนเช้า","มอ-นิง"],["afternoon","ตอนบ่าย","อาฟ-เตอะ-นูน"],["night","กลางคืน","ไนท์"]],
+ sound:"time และ night ลงท้ายด้วย -m และ -t ให้ปิดเสียงท้ายให้ชัด อย่าอ่านเป็น ไท หรือ ไน",
+ g:"What time is it? → It is + เลข + o'clock\nผิดบ่อย: ✗ It is seven clock → ✓ It is seven o'clock",
+ s:[["What time is it?","ตอนนี้กี่โมง"],["It is seven o'clock.","เจ็ดโมงตรง"],["It is ten o'clock at night.","สี่ทุ่มตรง"]],
+ d:[["A","Excuse me. What time is it?"],["B","It is three o'clock."],["A","Thank you."]],
+ q:[["What time is it? แปลว่า?",["กี่โมง","วันอะไร","ชื่ออะไร"],0,"time = เวลา"],["เจ็ดโมงตรงคือ?",["It is seven o'clock.","It is seven clock.","I am seven."],0,"ใช้ o'clock"],["night คือ?",["เช้า","กลางคืน","บ่าย"],1,"night = กลางคืน"],["ขอถามเวลาอย่างสุภาพ",["Excuse me. What time is it?","Time!","What you time?"],0,"ใช้ Excuse me"],["three คือ?",["2","3","4"],1,"three = 3"]],
+ task:"ถามเวลาตัวเอง 5 ครั้ง ตอบด้วยเวลาจากนาฬิกา (ปัดเป็นเต็มชั่วโมง)"},
+{id:"oct-13",m:0,t:"สี",goal:"บอกสีและพูดสีของสิ่งของได้",
+ th:"คำบอกสีวางไว้หน้าคำนามในภาษาอังกฤษ เช่น a red bag (กระเป๋าสีแดง) ต่างจากภาษาไทยที่วางคำบอกสีไว้หลังคำนาม",
+ v:[["red","สีแดง","เรด"],["blue","สีน้ำเงิน/ฟ้า","บลู"],["green","สีเขียว","กรีน"],["black","สีดำ","แบล็ก"],["white","สีขาว","ไวท์"],["yellow","สีเหลือง","เยล-โลว์"]],
+ sound:"red และ green มีเสียง r ให้ม้วนลิ้นเล็กน้อยโดยไม่แตะเพดานปาก และ blue มีเสียง l ให้ปลายลิ้นแตะเหงือกบน",
+ g:"a + สี + นามเอกพจน์: a red bag\nผิดบ่อย: ✗ a bag red → ✓ a red bag",
+ s:[["I have a black bag.","ฉันมีกระเป๋าสีดำ"],["My passport is blue.","พาสปอร์ตฉันสีน้ำเงิน"],["What color is it?","มันสีอะไร"]],
+ d:[["A","Is this your bag?"],["B","Yes. It is a black bag."],["A","What color is your ticket?"],["B","It is white."]],
+ q:[["red คือ?",["สีแดง","สีเขียว","สีดำ"],0,"red = แดง"],["ข้อใดถูก?",["a bag red","a red bag","red a bag"],1,"สีอยู่หน้านาม"],["ถามสีว่า?",["What color is it?","What time is it?","Who is it?"],0,"color = สี"],["white คือ?",["ขาว","ดำ","เหลือง"],0,"white = ขาว"],["My passport is ___ (น้ำเงิน)",["blue","bags","is"],0,"blue = น้ำเงิน"]],
+ task:"มองหาของ 5 ชิ้น พูดว่า It is a ... (สี) ... เช่น It is a black bag."},
+{id:"oct-14",m:0,t:"เครื่องดื่มและ Would you like...?",goal:"เสนอและตอบรับ/ปฏิเสธอย่างสุภาพได้",
+ th:"Would you like...? ใช้เสนอสิ่งของอย่างสุภาพ ตอบรับว่า Yes, please. ปฏิเสธว่า No, thank you. เป็นประโยคพื้นฐานของงานบริการ",
+ v:[["water","น้ำ","วอ-เตอะ"],["tea","ชา","ที"],["coffee","กาแฟ","คอ-ฟี่"],["juice","น้ำผลไม้","จูส"],["Would you like...?","คุณต้องการ...ไหม","วูด-ยู-ไลค์"],["Yes, please.","ค่ะ/ครับ ขอบคุณ","เยส-พลีส"],["No, thank you.","ไม่ค่ะ ขอบคุณ","โน-แธงค์-ยู"]],
+ sound:"juice ขึ้นต้นด้วยเสียง j (จ) แบบมีลมและลงท้าย -s เบา ๆ และ water ตัว t กลางคำมักออกเสียงเบาแบบ วอ-เดอะ ในสำเนียงอเมริกัน",
+ g:"Would you like + นาม + ? เช่น Would you like water?\nตอบ: Yes, please. / No, thank you.\nผิดบ่อย: ✗ You want water? (ห้วนเกินไปในงานบริการ) → ✓ Would you like water?",
+ s:[["Would you like water?","คุณต้องการน้ำไหมคะ"],["Yes, please.","ค่ะ ขอบคุณ"],["No, thank you.","ไม่ค่ะ ขอบคุณ"]],
+ d:[["A","Would you like tea or coffee?"],["B","Coffee, please."],["A","Here you are."],["B","Thank you."]],
+ q:[["เสนอน้ำอย่างสุภาพ",["Would you like water?","You water!","Water you?"],0,"ใช้ Would you like"],["ปฏิเสธอย่างสุภาพ",["No, thank you.","No.","Go"],0,"เติม thank you"],["coffee คือ?",["ชา","กาแฟ","น้ำ"],1,"coffee = กาแฟ"],["ตอบรับว่า?",["Yes, please.","Yes, you.","Please no"],0,"Yes, please"],["tea คือ?",["ชา","น้ำผลไม้","น้ำ"],0,"tea = ชา"]],
+ task:"เล่นบทบาทเสนอเครื่องดื่ม 3 ชนิดกับตัวเอง พูดทั้งฝั่งผู้เสนอและผู้ตอบ"},
+{id:"oct-15",m:0,t:"ทบทวนสัปดาห์ที่ 3",goal:"ทบทวนบทที่ 12–14 ไม่เรียนเนื้อหาใหม่",
+ th:"วันทบทวน: เปิดบทที่ 12–14 ฟังซ้ำ ทบทวนคำที่ยังไม่แม่นในคลังคำศัพท์ แล้วทำแบบทดสอบด้านล่าง",
+ v:[["time","เวลา","ไทม์"],["red","สีแดง","เรด"],["coffee","กาแฟ","คอ-ฟี่"]],
+ sound:"ทบทวนเสียงท้ายคำ -m -t -s และเสียง r, l, th ให้ชัด",
+ g:"ทบทวน: What time is it? / a red bag / Would you like water?",
+ s:[["It is seven o'clock.","เจ็ดโมงตรง"],["I have a blue bag.","ฉันมีกระเป๋าสีน้ำเงิน"],["Would you like coffee?","คุณต้องการกาแฟไหมคะ"]],
+ d:[["A","Would you like tea?"],["B","No, thank you. What time is it?"],["A","It is nine o'clock."]],
+ q:[["กี่โมง?",["What time is it?","What color is it?","Who are you?"],0,"บทที่ 12"],["กระเป๋าสีแดง",["a red bag","a bag red","red bags a"],0,"บทที่ 13"],["เสนอชาอย่างสุภาพ",["Would you like tea?","Tea you?","You tea"],0,"บทที่ 14"],["ปฏิเสธอย่างสุภาพ",["No, thank you.","No!","Not"],0,"บทที่ 14"],["nine คือ?",["8","9","10"],1,"nine = 9"]],
+ task:"พูดเล่าสิ่งที่เรียนในสัปดาห์นี้ 5 ประโยค แล้วอัดเสียงเก็บไว้"}];
+const CC=[["Tell me about yourself.","โครงคำตอบ: ชื่อ → ประสบการณ์ปัจจุบัน (AR) → ทักษะ → ทำไมสนใจงานนี้","My name is [ชื่อ]. I work in Accounts Receivable. I talk with customers and solve problems. I enjoy helping people, so I want to be cabin crew."],
+["Why do you want to be cabin crew?","บอกเหตุผลจริงของคุณ 2 ข้อ","I want to be cabin crew because I like helping people and I like working in a team. [เหตุผลของคุณเอง]"],
+["Why should we hire you?","เชื่อมประสบการณ์ AR เช่น คุยกับลูกค้า ความละเอียด ความรับผิดชอบ","I am careful and polite. In my job, I talk with customers every day. [ตัวอย่างจริงของคุณ]"]];
+const S=()=>{try{return JSON.parse(localStorage.getItem("ej")||"{}")}catch(e){return{}}};
+let st=Object.assign({done:{},scores:{},vocab:{},last:null,goal:"2027-06-01",rec:{}},S());
+const save=()=>{try{localStorage.setItem("ej",JSON.stringify(st))}catch(e){}};
+let tab="home",cur=null,rate=0.8,hide=false,qs=null,rec=null,q="";
+const $=document.getElementById.bind(document);
+const pct=(ids)=>ids.length?Math.round(ids.filter(i=>st.done[i]).length/ids.length*100):0;
+const bar=p=>`<div class="bar"><i style="width:${p}%"></i></div>`;
+function say(t){if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับเสียงอ่าน ลองใช้ Safari หรือ Chrome รุ่นใหม่");return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;speechSynthesis.speak(u)}
+function go(t,l){tab=t;cur=l||null;qs=null;render();scrollTo(0,0)}
+function nav(){const T=[["home","หน้าหลัก"],["course","หลักสูตร"],["vocab","คำศัพท์"],["crew","แอร์"],["more","ความก้าวหน้า"]];$("nav").innerHTML=T.map(([k,n])=>`<button class="${tab==k||(tab=="lesson"&&k=="course")?"on":""}" onclick="go('${k}')">${n}</button>`).join("")}
+function render(){nav();$("app").innerHTML=({home,course,lesson,vocab,crew,more})[tab]()}
+function home(){const ids=L.map(l=>l.id),nx=L.find(l=>!st.done[l.id])||L[0],last=L.find(l=>l.id==st.last);
+const days=Math.max(0,Math.ceil((new Date(st.goal)-new Date())/864e5));
+return `<h1>English Journey</h1><div class="mu">Beginner to Cabin Crew · ต.ค. 2569 – 31 พ.ค. 2570</div>
+<div class="c"><h2>ความก้าวหน้าบทที่มีในเว็บ</h2>${bar(pct(ids))}<div class="mu">${pct(ids)}% (${ids.filter(i=>st.done[i]).length}/${ids.length} บท)</div>
+<button class="b" onclick="go('lesson','${(last&&!st.done[last.id]?last:nx).id}')">เรียนต่อ: ${(last&&!st.done[last.id]?last:nx).t}</button></div>
+<div class="c"><h2>ตารางเรียน 2 ชั่วโมง</h2><table><tr><td>20 น.</td><td>คำศัพท์และการออกเสียง</td></tr><tr><td>25 น.</td><td>ไวยากรณ์</td></tr><tr><td>25 น.</td><td>ฟังและพูดตาม</td></tr><tr><td>30 น.</td><td>ฝึกพูดและสนทนา</td></tr><tr><td>15 น.</td><td>ภาษาอังกฤษสำหรับแอร์</td></tr><tr><td>5 น.</td><td>ทบทวน</td></tr></table><div class="mu">แนะนำ: วันที่ 7 ของทุกสัปดาห์เป็นวันทบทวนและแบบทดสอบ ไม่เรียนเนื้อหาใหม่</div></div>
+<div class="c"><h2>เป้าหมายก่อนเปิดเทอม มรร.</h2><div class="mu">ภาษาจีน ภาคเรียนที่ 1 ปีการศึกษา 2570 (ตั้งวันที่เปิดเทอมเองได้)</div><input type="date" value="${st.goal}" onchange="st.goal=this.value;save();render()"><p>เหลืออีก <b>${days}</b> วัน</p></div>`}
+function course(){return `<h1>หลักสูตร 8 เดือน</h1><input type="search" placeholder="ค้นหาบทเรียน" value="${q}" oninput="q=this.value;course2()"><div id="cl">${cl()}</div>`}
+function course2(){$("cl").innerHTML=cl()}
+function cl(){return MONTHS.map((m,i)=>{const ls=L.filter(l=>l.m==i&&(l.t+l.id).toLowerCase().includes(q.toLowerCase()));if(q&&!ls.length)return"";
+return `<div class="c"><h2>${m[0]}</h2><div class="mu">${m[1]}</div>${bar(pct(L.filter(l=>l.m==i).map(l=>l.id)))}${ls.map(l=>`<button class="o" onclick="go('lesson','${l.id}')">${st.done[l.id]?"✅":"▶️"} ${l.t}</button>`).join("")||'<p class="mu">บทเรียนเดือนนี้ยังไม่ได้สร้างในเวอร์ชันนี้ (ดูโครงหัวข้อด้านบน)</p>'}</div>`}).join("")}
+function lesson(){const l=L.find(x=>x.id==cur);st.last=l.id;save();
+const sp=t=>`<button class="b g" onclick="say(this.dataset.t)" data-t="${t.replace(/"/g,"&quot;")}">🔊</button>`;
+return `<button class="b g" onclick="go('course')">← กลับ</button><h1>${l.t}</h1><div class="mu">เป้าหมาย: ${l.goal}</div>
+<div class="c">${l.th}</div>
+<div class="c"><h3>ฟังและตั้งค่า</h3>ความเร็วเสียง: <select onchange="rate=+this.value"><option value="0.6">ช้ามาก</option><option value="0.8" selected>ช้า</option><option value="1">ปกติ</option></select>
+<button class="b g" onclick="hide=!hide;render()">${hide?"แสดง":"ซ่อน"}คำแปล</button></div>
+<div class="c"><h3>คำศัพท์</h3><table>${l.v.map(([e,t,r])=>`<tr><td>${sp(e)}</td><td><b>${e}</b><br><span class="mu">อ่านว่า ${r}</span></td><td>${hide?"•••":t}<br><button class="tag" onclick="mark('${e}',1)">${st.vocab[e]==1?"✓ จำได้":"จำได้"}</button> <button class="tag" onclick="mark('${e}',0)">${st.vocab[e]==0?"✓ ยังไม่แม่น":"ยังไม่แม่น"}</button></td></tr>`).join("")}</table>
+<p class="mu">💡 ${l.sound}<br>คำอ่านไทยช่วยได้เพียงเริ่มต้น กรุณาฟังเสียงจริงทุกครั้ง</p></div>
+<div class="c"><h3>ไวยากรณ์</h3><div style="white-space:pre-line">${l.g}</div></div>
+<div class="c"><h3>ตัวอย่างประโยค</h3>${l.s.map(([e,t])=>`<p>${sp(e)} ${e}<br><span class="mu">${hide?"•••":t}</span></p>`).join("")}</div>
+<div class="c"><h3>บทสนทนา</h3>${l.d.map(([w,t])=>`<p><b>${w}:</b> ${t} ${sp(t)}</p>`).join("")}</div>
+<div class="c"><h3>ฝึกพูดตามและอัดเสียง</h3><button class="b" onclick="recStart()">⏺ อัด</button><button class="b g" onclick="recStop()">⏹ หยุด</button><div id="ra"></div>
+<p class="mu">เว็บนี้ไม่ได้ตรวจสำเนียงให้ ใช้ฟังเทียบเสียงตัวเองกับเสียงตัวอย่างด้วยตัวเอง (ต้องอนุญาตไมค์ และบางเบราว์เซอร์ไม่รองรับ)</p></div>
+<div class="c"><h3>ภารกิจ</h3>${l.task}</div>
+<div class="c"><h3>แบบฝึกหัด 5 ข้อ</h3><div id="qz">${quiz(l)}</div></div>
+<button class="b ${st.done[l.id]?"":"ok"}" onclick="st.done['${l.id}']=!st.done['${l.id}'];save();render()">${st.done[l.id]?"✅ เรียนจบแล้ว (กดเพื่อยกเลิก)":"ทำเครื่องหมายว่าเรียนจบแล้ว"}</button>`}
+function quiz(l){qs=qs||{i:0,s:0,p:null};if(qs.i>=l.q.length){st.scores[l.id]=Math.round(qs.s/l.q.length*100);save();return `<p><b>คะแนน ${qs.s}/${l.q.length}</b></p><button class="b" onclick="qs=null;render()">ทำใหม่</button>`}
+const [q1,o,a,w]=l.q[qs.i];return `<p class="mu">ข้อ ${qs.i+1}/${l.q.length}</p><p><b>${q1}</b></p>${o.map((x,k)=>`<button class="o ${qs.p!=null?(k==a?"r":k==qs.p?"w":""):""}" ${qs.p!=null?"disabled":""} onclick="ans(${k})">${x}</button>`).join("")}${qs.p!=null?`<p>${qs.p==a?"✓ ถูก":"✗ ผิด"} — ${w}</p><button class="b" onclick="qs.i++;qs.p=null;render()">ต่อไป</button>`:""}`}
+function ans(k){const l=L.find(x=>x.id==cur);qs.p=k;if(k==l.q[qs.i][2])qs.s++;render()}
+function mark(w,v){st.vocab[w]=v;save();render()}
+async function recStart(){try{const s=await navigator.mediaDevices.getUserMedia({audio:true});const ch=[];rec=new MediaRecorder(s);rec.ondataavailable=e=>ch.push(e.data);rec.onstop=()=>{s.getTracks().forEach(t=>t.stop());$("ra").innerHTML=`<audio controls src="${URL.createObjectURL(new Blob(ch,{type:rec.mimeType}))}"></audio>`};rec.start()}catch(e){alert("อัดเสียงไม่ได้บนเบราว์เซอร์นี้ ให้ใช้แอป Voice Memos ของ iPhone แทน")}}
+function recStop(){if(rec&&rec.state!="inactive")rec.stop()}
+function vocab(){const all=L.flatMap(l=>l.v);return `<h1>คลังคำศัพท์</h1><input type="search" placeholder="ค้นหา" oninput="vs(this.value)"><div id="vl">${vl(all,"")}</div>`}
+function vs(v){$("vl").innerHTML=vl(L.flatMap(l=>l.v),v)}
+function vl(a,f){f=f.toLowerCase();return `<div class="c"><table>${a.filter(x=>(x[0]+x[1]).toLowerCase().includes(f)).map(([e,t,r])=>`<tr><td><button class="b g" onclick="say('${e}')">🔊</button></td><td><b>${e}</b> <span class="mu">${r}</span><br>${t}</td><td>${st.vocab[e]==1?"✅":st.vocab[e]==0?"⚠️":""}</td></tr>`).join("")}</table></div>`}
+function crew(){return `<h1>เตรียมสมัคร Cabin Crew</h1><div class="c"><b>คุณสมบัติสายการบิน</b><p class="mu">ไม่ได้ใส่เกณฑ์ไว้ในเว็บนี้เพราะเปลี่ยนบ่อย ตรวจสอบจากหน้า careers ทางการของสายการบินเสมอ แล้วจดวันที่ตรวจสอบ:</p><textarea rows="3" placeholder="เช่น Emirates: ตรวจเมื่อ __/__/____ ..." oninput="st.notes=this.value;save()">${st.notes||""}</textarea></div>
+${CC.map(([qq,h,ex],i)=>`<div class="c"><h3>${qq} ${"<button class='b g' onclick=\"say(this.dataset.t)\" data-t='"+qq+"'>🔊</button>"}</h3><p class="mu">ลองตอบก่อนเปิดดู: ${h}</p><details><summary>ดูตัวอย่างโครงคำตอบ</summary><p>${ex}</p><p class="mu">⚠️ ตัวอย่างนี้เป็นโครงเท่านั้น เปลี่ยนเป็นเรื่องจริงของคุณและพูดด้วยคำของตัวเอง อย่าท่องทั้งหมดและอย่าเพิ่มประสบการณ์ที่ไม่มีจริง</p></details></div>`).join("")}`}
+function more(){const ids=L.map(l=>l.id),sc=Object.entries(st.scores),v=Object.values(st.vocab);
+return `<h1>ความก้าวหน้า</h1><div class="c"><h2>สรุป</h2>เรียนจบ ${ids.filter(i=>st.done[i]).length}/${ids.length} บท<br>คำศัพท์จำได้ ${v.filter(x=>x==1).length} · ต้องทบทวน ${v.filter(x=>x==0).length}<h3>คะแนนแบบฝึกหัด</h3>${sc.map(([k,s])=>`${L.find(l=>l.id==k).t}: ${s}%`).join("<br>")||"<span class=mu>ยังไม่มี</span>"}</div>
+<div class="c"><h2>สำรอง/กู้คืน</h2><button class="b" onclick="exp()">Export JSON</button><input type="file" accept=".json" onchange="imp(this.files[0])">
+<p class="mu">ข้อมูลเก็บในเบราว์เซอร์ของเครื่องนี้ (localStorage) เท่านั้น <b>ไม่ซิงก์ข้ามอุปกรณ์</b> และจะหายถ้าล้างข้อมูลเว็บ ควร Export เป็นประจำ</p></div>`}
+function exp(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(st)],{type:"application/json"}));a.download="english-journey-progress.json";a.click()}
+function imp(f){if(!f)return;f.text().then(t=>{try{st=Object.assign(st,JSON.parse(t));save();render();alert("นำเข้าสำเร็จ")}catch(e){alert("ไฟล์ไม่ถูกต้อง")}})}
+render();
+</script></body></html>
